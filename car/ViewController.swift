@@ -10,6 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
+    var scrollView: UIScrollView = {
+       let view = UIScrollView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.contentSize.height = 2000
+        //view.backgroundColor = .red
+        
+        return view
+    }()
+    
     let topbar = UIImageView()
     let firstTitle = UILabel()
     
@@ -30,12 +40,28 @@ class ViewController: UIViewController {
     let speedResult = UILabel()
     let batteryUsageResult = UILabel()
     let batteryLifeResult = UILabel()
+    
+    let separator = UIView()
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        view.addSubview(scrollView)
+        setupScrollView()
         setupView()
         setupConstraints()
+        
+        
+    }
+    
+    func setupScrollView() {
+        scrollView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
+        scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        //setupView()
     }
     
     func setupView() {
@@ -45,7 +71,7 @@ class ViewController: UIViewController {
         
         firstTitle.text = "Summary of latest drive"
         firstTitle.font = firstTitle.font.withSize(22)
-        view.addSubview(firstTitle)
+        scrollView.addSubview(firstTitle)
         
         mapIcon.image = UIImage(named: "mapIcon")
         
@@ -56,9 +82,9 @@ class ViewController: UIViewController {
         mapResult.text = "0 km"
         mapResult.font = mapResult.font.withSize(30)
         
-        view.addSubview(mapIcon)
-        view.addSubview(mapText)
-        view.addSubview(mapResult)
+        scrollView.addSubview(mapIcon)
+        scrollView.addSubview(mapText)
+        scrollView.addSubview(mapResult)
         
         timeIcon.image = UIImage(named: "timeIcon")
         
@@ -69,9 +95,9 @@ class ViewController: UIViewController {
         timeResult.text = "00:00 min"
         timeResult.font = timeResult.font.withSize(30)
         
-        view.addSubview(timeIcon)
-        view.addSubview(timeText)
-        view.addSubview(timeResult)
+        scrollView.addSubview(timeIcon)
+        scrollView.addSubview(timeText)
+        scrollView.addSubview(timeResult)
         
         speedIcon.image = UIImage(named: "speedIcon")
         
@@ -82,10 +108,38 @@ class ViewController: UIViewController {
         speedResult.text = "00 km/t"
         speedResult.font = speedResult.font.withSize(30)
         
-        view.addSubview(speedIcon)
-        view.addSubview(speedText)
-        view.addSubview(speedResult)
+        scrollView.addSubview(speedIcon)
+        scrollView.addSubview(speedText)
+        scrollView.addSubview(speedResult)
         
+        batteryUsageIcon.image = UIImage(named: "batteryUsageIcon")
+        
+        batteryUsageText.text = "Battery used"
+        batteryUsageText.font = UIFont.boldSystemFont(ofSize: 14)
+        batteryUsageText.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
+        
+        batteryUsageResult.text = "00 kwh"
+        batteryUsageResult.font = speedResult.font.withSize(30)
+        
+        scrollView.addSubview(batteryUsageIcon)
+        scrollView.addSubview(batteryUsageText)
+        scrollView.addSubview(batteryUsageResult)
+        
+        batteryLifeIcon.image = UIImage(named: "batteryLifeIcon")
+        
+        batteryLifeText.text = "Battery % left"
+        batteryLifeText.font = UIFont.boldSystemFont(ofSize: 14)
+        batteryLifeText.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
+        
+        batteryLifeResult.text = "00 %"
+        batteryLifeResult.font = speedResult.font.withSize(30)
+        
+        scrollView.addSubview(batteryLifeIcon)
+        scrollView.addSubview(batteryLifeText)
+        scrollView.addSubview(batteryLifeResult)
+        
+        separator.backgroundColor = UIColor.lightGray //UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
+        scrollView.addSubview(separator)
     }
     
     func setupConstraints() {
@@ -97,7 +151,7 @@ class ViewController: UIViewController {
         topbar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
 
         firstTitle.translatesAutoresizingMaskIntoConstraints = false
-        firstTitle.topAnchor.constraint(equalTo: topbar.bottomAnchor, constant: 20).isActive = true
+        firstTitle.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
         firstTitle.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
         mapIcon.translatesAutoresizingMaskIntoConstraints = false
@@ -141,6 +195,41 @@ class ViewController: UIViewController {
         speedResult.translatesAutoresizingMaskIntoConstraints = false
         speedResult.topAnchor.constraint(equalTo: speedText.bottomAnchor, constant: 10).isActive = true
         speedResult.centerXAnchor.constraint(equalTo: speedText.centerXAnchor).isActive = true
+        
+        batteryUsageIcon.translatesAutoresizingMaskIntoConstraints = false
+        batteryUsageIcon.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        batteryUsageIcon.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        batteryUsageIcon.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -60).isActive = true
+        batteryUsageIcon.topAnchor.constraint(equalTo: mapResult.bottomAnchor, constant: 30).isActive = true
+        
+        batteryUsageText.translatesAutoresizingMaskIntoConstraints = false
+        batteryUsageText.topAnchor.constraint(equalTo: batteryUsageIcon.bottomAnchor, constant: 10).isActive = true
+        batteryUsageText.centerXAnchor.constraint(equalTo: batteryUsageIcon.centerXAnchor).isActive = true
+        
+        batteryUsageResult.translatesAutoresizingMaskIntoConstraints = false
+        batteryUsageResult.topAnchor.constraint(equalTo: batteryUsageText.bottomAnchor, constant: 10).isActive = true
+        batteryUsageResult.centerXAnchor.constraint(equalTo: batteryUsageText.centerXAnchor).isActive = true
+        
+        batteryLifeIcon.translatesAutoresizingMaskIntoConstraints = false
+        batteryLifeIcon.widthAnchor.constraint(equalToConstant: 80).isActive = true
+        batteryLifeIcon.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        batteryLifeIcon.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 60).isActive = true
+        batteryLifeIcon.topAnchor.constraint(equalTo: speedResult.bottomAnchor, constant: 30).isActive = true
+        
+        batteryLifeText.translatesAutoresizingMaskIntoConstraints = false
+        batteryLifeText.topAnchor.constraint(equalTo: batteryLifeIcon.bottomAnchor, constant: 10).isActive = true
+        batteryLifeText.centerXAnchor.constraint(equalTo: batteryLifeIcon.centerXAnchor).isActive = true
+        
+        batteryLifeResult.translatesAutoresizingMaskIntoConstraints = false
+        batteryLifeResult.topAnchor.constraint(equalTo: batteryLifeText.bottomAnchor, constant: 10).isActive = true
+        batteryLifeResult.centerXAnchor.constraint(equalTo: batteryLifeText.centerXAnchor).isActive = true
+        
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        separator.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        separator.widthAnchor.constraint(equalToConstant: view.bounds.width - 40).isActive = true
+        separator.topAnchor.constraint(equalTo: batteryLifeResult.bottomAnchor, constant: 25).isActive = true
+        separator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        
     }
 
 }
