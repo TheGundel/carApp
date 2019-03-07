@@ -14,13 +14,13 @@ class ViewController: UIViewController {
     var scrollView: UIScrollView = {
        let view = UIScrollView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentSize.height = 2000
-        //view.backgroundColor = .red
+        view.contentSize.height = 1500
         
         return view
     }()
     
     let topbar = UIImageView()
+    let logo = UIImageView()
     let firstTitle = UILabel()
     
     let mapIcon = UIImageView()
@@ -40,6 +40,9 @@ class ViewController: UIViewController {
     let speedResult = UILabel()
     let batteryUsageResult = UILabel()
     let batteryLifeResult = UILabel()
+    
+    let efficiencyLabel = UILabel()
+    let efficiencyResult = UILabel()
     
     let separator = UIView()
     
@@ -61,13 +64,15 @@ class ViewController: UIViewController {
         scrollView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         scrollView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
-        //setupView()
     }
     
     func setupView() {
         
         topbar.backgroundColor = UIColor(red:0.44, green:0.75, blue:0.13, alpha:1.0)
         view.addSubview(topbar)
+        
+        logo.image = UIImage(named: "leafWhite")
+        topbar.addSubview(logo)
         
         firstTitle.text = "Summary of latest drive"
         firstTitle.font = firstTitle.font.withSize(22)
@@ -138,8 +143,18 @@ class ViewController: UIViewController {
         scrollView.addSubview(batteryLifeText)
         scrollView.addSubview(batteryLifeResult)
         
-        separator.backgroundColor = UIColor.lightGray //UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
+        separator.backgroundColor = UIColor.lightGray
         scrollView.addSubview(separator)
+        
+        efficiencyLabel.text = "Efficieny"
+        efficiencyLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        efficiencyLabel.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
+        
+        efficiencyResult.text = "Some result"
+        efficiencyResult.font = UIFont.boldSystemFont(ofSize: 16)
+        
+        scrollView.addSubview(efficiencyLabel)
+        scrollView.addSubview(efficiencyResult)
     }
     
     func setupConstraints() {
@@ -149,6 +164,12 @@ class ViewController: UIViewController {
         topbar.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         topbar.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         topbar.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        logo.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        logo.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        logo.bottomAnchor.constraint(equalTo: topbar.bottomAnchor, constant: -10).isActive = true
+        logo.leftAnchor.constraint(equalTo: topbar.leftAnchor, constant: 15).isActive = true
 
         firstTitle.translatesAutoresizingMaskIntoConstraints = false
         firstTitle.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
@@ -230,21 +251,14 @@ class ViewController: UIViewController {
         separator.topAnchor.constraint(equalTo: batteryLifeResult.bottomAnchor, constant: 25).isActive = true
         separator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+        efficiencyLabel.translatesAutoresizingMaskIntoConstraints = false
+        efficiencyLabel.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30).isActive = true
+        efficiencyLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
+        
+        efficiencyResult.translatesAutoresizingMaskIntoConstraints = false
+        efficiencyResult.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30).isActive = true
+        efficiencyResult.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
+        
     }
 
 }
-
-//CODE WE MIGHT NEED LATER :-)
-
-//    private let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-
-//        collectionView.isScrollEnabled = true
-//        collectionView.backgroundColor = .red
-//        collectionView.register(MainView.self, forCellWithReuseIdentifier: MainView.reuseIdentifier)
-//        view.addSubview(collectionView)
-
-//        collectionView.translatesAutoresizingMaskIntoConstraints = false
-//        collectionView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-//        collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-//        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-//        collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
