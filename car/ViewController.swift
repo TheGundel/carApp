@@ -8,7 +8,35 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ConnectDelegate {
+    func connect(_ connection: Connect, failedToConnectToHost host: String, withError error: Error?) {
+        print("Failed")
+    }
+    
+    func connect(_ connection: Connect, didConnectToHost host: String) {
+        print("Success")
+    }
+    
+    func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
+        print("John 1")
+    }
+    
+    func connect(_ connection: Connect, failedToSendCommand command: ATCommandProtocol, dueToErrorOfKind kind: CommandError) {
+        print("John 2")
+    }
+    
+    func connect(_ connection: Connect, didEncounterReadError error: Error) {
+        print("John 3")
+    }
+    
+    func connectDidReceiveEndEncountered(_ connection: Connect) {
+        print("John 4")
+    }
+    
+    func connect(_ connection: Connect, didDisconnectFromHost host: String) {
+        print("John 5")
+    }
+    
     
     
     var scrollView: UIScrollView = {
@@ -46,6 +74,9 @@ class ViewController: UIViewController {
     
     let separator = UIView()
     
+    private var connection: Connect!
+    
+    let connectButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,7 +86,8 @@ class ViewController: UIViewController {
         setupView()
         setupConstraints()
         
-        
+        connection = Connect()
+        connection.delegate = self
     }
     
     func setupScrollView() {
@@ -66,7 +98,22 @@ class ViewController: UIViewController {
         
     }
     
+    @objc func buttonAction(sender: UIButton!) {
+        print("CLICKED")
+        if connection.isConnected {
+            connection.disconnect()
+        } else {
+            connection.connect()
+        }
+    }
+    
     func setupView() {
+        
+        connectButton.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
+        connectButton.backgroundColor = .green
+        connectButton.setTitle("Connect", for: .normal)
+        connectButton.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
+        scrollView.addSubview(connectButton)
         
         topbar.backgroundColor = UIColor(red:0.44, green:0.75, blue:0.13, alpha:1.0)
         view.addSubview(topbar)
@@ -259,6 +306,31 @@ class ViewController: UIViewController {
         efficiencyResult.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30).isActive = true
         efficiencyResult.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         
+        connectButton.translatesAutoresizingMaskIntoConstraints = false
+        connectButton.topAnchor.constraint(equalTo: efficiencyLabel.bottomAnchor, constant: 20).isActive = true
+        connectButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
     }
-
+//
+//    func connect( connection: Connect, failedToConnectToHost host: String, withError error: Error?) {
+//        print("Failed to connect to \(host) reason: \(error?.localizedDescription ?? "")")
+//    }
+//
+//    func connect( connection: Connect, didConnectToHost host: String) {
+//        print("Connected to \(host)")
+//    }
+//
+//    func connect( connection: Connect, didEncounterReadError error: Error) {
+//        print("Readerror")
+//    }
+//
+//    func connectDidReceiveEndEncountered( connection: Connect) {
+//        print("Encounter")
+//    }
+//
+//    func connect( connection: Connect, didDisconnectFromHost host: String) {
+//        print("Disconnected from \(host)")
+//    }
+    
+    
 }
+

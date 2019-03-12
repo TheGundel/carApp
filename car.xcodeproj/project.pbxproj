@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56E426EB223800810096895F /* Connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EA2238007E0096895F /* Connect.swift */; };
+		56E426ED223802150096895F /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EC223802150096895F /* Commands.swift */; };
+		56E426EF223802870096895F /* CanMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EE223802870096895F /* CanMessage.swift */; };
+		56E426F12238045B0096895F /* DataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426F02238045B0096895F /* DataProcessor.swift */; };
 		56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FEA7D7222545B50055CFDD /* AppDelegate.swift */; };
 		56FEA7DA222545B50055CFDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FEA7D9222545B50055CFDD /* ViewController.swift */; };
 		56FEA7DF222545BA0055CFDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56FEA7DE222545BA0055CFDD /* Assets.xcassets */; };
@@ -14,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56E426EA2238007E0096895F /* Connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connect.swift; sourceTree = "<group>"; };
+		56E426EC223802150096895F /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
+		56E426EE223802870096895F /* CanMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanMessage.swift; sourceTree = "<group>"; };
+		56E426F02238045B0096895F /* DataProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProcessor.swift; sourceTree = "<group>"; };
 		56FEA7D4222545B50055CFDD /* car.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = car.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56FEA7D7222545B50055CFDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56FEA7D9222545B50055CFDD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -52,11 +60,15 @@
 		56FEA7D6222545B50055CFDD /* car */ = {
 			isa = PBXGroup;
 			children = (
+				56E426EA2238007E0096895F /* Connect.swift */,
 				56FEA7D7222545B50055CFDD /* AppDelegate.swift */,
 				56FEA7D9222545B50055CFDD /* ViewController.swift */,
 				56FEA7DE222545BA0055CFDD /* Assets.xcassets */,
 				56FEA7E0222545BA0055CFDD /* LaunchScreen.storyboard */,
 				56FEA7E3222545BA0055CFDD /* Info.plist */,
+				56E426EC223802150096895F /* Commands.swift */,
+				56E426EE223802870096895F /* CanMessage.swift */,
+				56E426F02238045B0096895F /* DataProcessor.swift */,
 			);
 			path = car;
 			sourceTree = "<group>";
@@ -134,6 +146,10 @@
 			files = (
 				56FEA7DA222545B50055CFDD /* ViewController.swift in Sources */,
 				56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */,
+				56E426F12238045B0096895F /* DataProcessor.swift in Sources */,
+				56E426EB223800810096895F /* Connect.swift in Sources */,
+				56E426ED223802150096895F /* Commands.swift in Sources */,
+				56E426EF223802870096895F /* CanMessage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
