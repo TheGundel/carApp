@@ -9,35 +9,6 @@
 import UIKit
 
 class ViewController: UIViewController, ConnectDelegate {
-    func connect(_ connection: Connect, failedToConnectToHost host: String, withError error: Error?) {
-        print("Failed")
-    }
-    
-    func connect(_ connection: Connect, didConnectToHost host: String) {
-        print("Success")
-    }
-    
-    func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
-        print("John 1")
-    }
-    
-    func connect(_ connection: Connect, failedToSendCommand command: ATCommandProtocol, dueToErrorOfKind kind: CommandError) {
-        print("John 2")
-    }
-    
-    func connect(_ connection: Connect, didEncounterReadError error: Error) {
-        print("John 3")
-    }
-    
-    func connectDidReceiveEndEncountered(_ connection: Connect) {
-        print("John 4")
-    }
-    
-    func connect(_ connection: Connect, didDisconnectFromHost host: String) {
-        print("John 5")
-    }
-    
-    
     
     var scrollView: UIScrollView = {
        let view = UIScrollView()
@@ -49,6 +20,7 @@ class ViewController: UIViewController, ConnectDelegate {
     
     let topbar = UIImageView()
     let logo = UIImageView()
+    let name = UILabel()
     let firstTitle = UILabel()
     
     let mapIcon = UIImageView()
@@ -75,7 +47,6 @@ class ViewController: UIViewController, ConnectDelegate {
     let separator = UIView()
     
     private var connection: Connect!
-    
     let connectButton = UIButton()
 
     override func viewDidLoad() {
@@ -119,6 +90,10 @@ class ViewController: UIViewController, ConnectDelegate {
         view.addSubview(topbar)
         
         logo.image = UIImage(named: "leafWhite")
+        name.text = "Good Name"
+        name.font = UIFont.boldSystemFont(ofSize: 20)
+        name.textColor = .white
+        topbar.addSubview(name)
         topbar.addSubview(logo)
         
         firstTitle.text = "Summary of latest drive"
@@ -217,6 +192,10 @@ class ViewController: UIViewController, ConnectDelegate {
         logo.widthAnchor.constraint(equalToConstant: 40).isActive = true
         logo.bottomAnchor.constraint(equalTo: topbar.bottomAnchor, constant: -10).isActive = true
         logo.leftAnchor.constraint(equalTo: topbar.leftAnchor, constant: 15).isActive = true
+        
+        name.translatesAutoresizingMaskIntoConstraints = false
+        name.leftAnchor.constraint(equalTo: logo.rightAnchor, constant: 15).isActive = true
+        name.centerYAnchor.constraint(equalTo: logo.centerYAnchor).isActive = true
 
         firstTitle.translatesAutoresizingMaskIntoConstraints = false
         firstTitle.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 40).isActive = true
@@ -310,26 +289,34 @@ class ViewController: UIViewController, ConnectDelegate {
         connectButton.topAnchor.constraint(equalTo: efficiencyLabel.bottomAnchor, constant: 20).isActive = true
         connectButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
     }
-//
-//    func connect( connection: Connect, failedToConnectToHost host: String, withError error: Error?) {
-//        print("Failed to connect to \(host) reason: \(error?.localizedDescription ?? "")")
-//    }
-//
-//    func connect( connection: Connect, didConnectToHost host: String) {
-//        print("Connected to \(host)")
-//    }
-//
-//    func connect( connection: Connect, didEncounterReadError error: Error) {
-//        print("Readerror")
-//    }
-//
-//    func connectDidReceiveEndEncountered( connection: Connect) {
-//        print("Encounter")
-//    }
-//
-//    func connect( connection: Connect, didDisconnectFromHost host: String) {
-//        print("Disconnected from \(host)")
-//    }
+    
+    func connect(_ connection: Connect, failedToConnectToHost host: String, withError error: Error?) {
+        print("Failed to connect to \(host) reason: \(error?.localizedDescription ?? "")")
+    }
+    
+    func connect(_ connection: Connect, didConnectToHost host: String) {
+        print("Connected to \(host)")
+    }
+    
+    func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
+        print("Received Data:", dataCollection)
+    }
+    
+    func connect(_ connection: Connect, failedToSendCommand command: ATCommandProtocol, dueToErrorOfKind kind: CommandError) {
+        print("Failed to send ATCommand: \(command) reason: \(kind)")
+    }
+    
+    func connect(_ connection: Connect, didEncounterReadError error: Error) {
+        print("Read error, reason: \(error)")
+    }
+    
+    func connectDidReceiveEndEncountered(_ connection: Connect) {
+        print("Received end encounter")
+    }
+    
+    func connect(_ connection: Connect, didDisconnectFromHost host: String) {
+        print("Disconnected from \(host)")
+    }
     
     
 }

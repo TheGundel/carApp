@@ -8,77 +8,9 @@
 
 import Foundation
 
-protocol SocketProtocol {
-    var inputStream: InputStream { get }
-    var outputStream: OutputStream { get }
-    
-    var host: CFString { get }
-    var port: UInt32 { get }
-    
-    init(host: CFString, port: UInt32)
-    
-    mutating func open()
-}
-
 enum CommandError: Error {
     case isBusy
     case outputStreamIsNotConnected
-}
-
-protocol ConnectDelegate: class {
-    
-    //Failed to connect to host
-    func connect(_ connection: Connect, failedToConnectToHost host: String, withError error: Error?)
-    
-    //Successful connection to host
-    func connect(_ connection: Connect, didConnectToHost host: String)
-    
-    //Received data from the input stream
-    func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection)
-    
-    //AT Command failed to send
-    func connect(_ connection: Connect, failedToSendCommand command: ATCommandProtocol, dueToErrorOfKind kind: CommandError)
-    
-    //Read error
-    func connect(_ connection: Connect, didEncounterReadError error: Error)
-    
-    //Received encountered event from stream
-    func connectDidReceiveEndEncountered(_ connection: Connect)
-    
-    //Disconnect the host
-    func connect(_ connection: Connect, didDisconnectFromHost host: String)
-}
-
-fileprivate struct SocketFactory {
-    static func createSocket(host: CFString, port: UInt32) -> SocketProtocol {
-        return Socket(host: host, port: port)
-    }
-}
-
-fileprivate struct Socket: SocketProtocol {
-    
-    let host: CFString
-    let port: UInt32
-    
-    private var readStream: Unmanaged<CFReadStream>?
-    private var writeStream: Unmanaged<CFWriteStream>?
-    
-    var inputStream: InputStream {
-        return readStream!.takeRetainedValue() as InputStream
-    }
-    
-    var outputStream: OutputStream {
-        return writeStream!.takeRetainedValue() as OutputStream
-    }
-    
-    init(host: CFString = "192.168.0.10" as CFString, port: UInt32 = 35000) {
-        self.host = host
-        self.port = port
-    }
-    
-    mutating func open() {
-        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, host as CFString, port, &readStream, &writeStream)
-    }
 }
 
 class Connect: NSObject {
@@ -217,8 +149,6 @@ extension Connect: StreamDelegate {
     /**
      Utility function for reading the bytes from the stream.
      
-     - Author: Frederik Sørensen
-     
      - Parameters:
      - stream: The stream from which the bytes should be read.
      */
@@ -262,4 +192,36 @@ extension Connect: StreamDelegate {
         }
     }
     
+}
+
+fileprivate struct Socket: SocketProtocol {
+    
+    let host: CFString
+    let port: UInt32
+    
+    private var readStream: Unmanaged<CFReadStream>?
+    private var writeStream: Unmanaged<CFWriteStream>?
+    
+    var inputStream: InputStream {
+        return readStream!.takeRetainedValue() as InputStream
+    }
+    
+    var outputStream: OutputStream {
+        return writeStream!.takeRetainedValue() as OutputStream
+    }
+    
+    init(host: CFString = "192.168.0.10" as CFString, port: UInt32 = 35000) {
+        self.host = host
+        self.port = port
+    }
+    
+    mutating func open() {
+        CFStreamCreatePairWithSocketToHost(kCFAllocatorDefault, host as CFString, port, &readStream, &writeStream)
+    }
+}
+
+fileprivate struct SocketFactory {
+    static func createSocket(host: CFString, port: UInt32) -> SocketProtocol {
+        return Socket(host: host, port: port)
+    }
 }
