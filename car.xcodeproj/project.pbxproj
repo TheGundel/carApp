@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		56CEB0C92239306500606D3A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0C82239306500606D3A /* Protocols.swift */; };
+		56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0EC22393D9500606D3A /* StartViewController.swift */; };
 		56E426EB223800810096895F /* Connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EA2238007E0096895F /* Connect.swift */; };
 		56E426ED223802150096895F /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EC223802150096895F /* Commands.swift */; };
 		56E426EF223802870096895F /* CanMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EE223802870096895F /* CanMessage.swift */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		56CEB0C82239306500606D3A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		56CEB0EC22393D9500606D3A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		56E426EA2238007E0096895F /* Connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connect.swift; sourceTree = "<group>"; };
 		56E426EC223802150096895F /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		56E426EE223802870096895F /* CanMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanMessage.swift; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				56E426EE223802870096895F /* CanMessage.swift */,
 				56E426F02238045B0096895F /* DataProcessor.swift */,
 				56CEB0C82239306500606D3A /* Protocols.swift */,
+				56CEB0EC22393D9500606D3A /* StartViewController.swift */,
 			);
 			path = car;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				56FEA7DA222545B50055CFDD /* ViewController.swift in Sources */,
+				56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */,
 				56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */,
 				56CEB0C92239306500606D3A /* Protocols.swift in Sources */,
 				56E426F12238045B0096895F /* DataProcessor.swift in Sources */,
