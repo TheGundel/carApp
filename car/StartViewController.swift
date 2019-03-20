@@ -28,7 +28,7 @@ class StartViewController: UIViewController {
         
         logo.image = UIImage(named: "leafGreen")
         
-        name.text = "Good name"
+        name.text = "Eco Drive"
         name.font = UIFont.boldSystemFont(ofSize: 20)
         name.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
         

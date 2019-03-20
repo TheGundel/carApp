@@ -104,7 +104,7 @@ class ViewController: UIViewController, ConnectDelegate {
         view.addSubview(topbar)
         
         logo.image = UIImage(named: "leafWhite")
-        name.text = "Good Name"
+        name.text = "Eco Drive"
         name.font = UIFont.boldSystemFont(ofSize: 20)
         name.textColor = .white
         topbar.addSubview(name)
