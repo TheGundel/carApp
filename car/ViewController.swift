@@ -48,6 +48,7 @@ class ViewController: UIViewController, ConnectDelegate {
     
     private var connection: Connect!
     let connectButton = UIButton()
+    let disconnectButton = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,13 @@ class ViewController: UIViewController, ConnectDelegate {
         }
     }
     
+    @objc func disconnect(sender: UIButton!) {
+        print("Trying to disconnect")
+        if connection.isConnected {
+            connection.disconnect()
+        }
+    }
+    
     func setupView() {
         
         connectButton.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
@@ -85,6 +93,12 @@ class ViewController: UIViewController, ConnectDelegate {
         connectButton.setTitle("Connect", for: .normal)
         connectButton.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
         scrollView.addSubview(connectButton)
+        
+        disconnectButton.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
+        disconnectButton.backgroundColor = .red
+        disconnectButton.setTitle("Disconnect", for: .normal)
+        disconnectButton.addTarget(self, action: #selector(disconnect(sender:)), for: .touchUpInside)
+        scrollView.addSubview(disconnectButton)
         
         topbar.backgroundColor = UIColor(red:0.44, green:0.75, blue:0.13, alpha:1.0)
         view.addSubview(topbar)
@@ -288,6 +302,10 @@ class ViewController: UIViewController, ConnectDelegate {
         connectButton.translatesAutoresizingMaskIntoConstraints = false
         connectButton.topAnchor.constraint(equalTo: efficiencyLabel.bottomAnchor, constant: 20).isActive = true
         connectButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
+        
+        disconnectButton.translatesAutoresizingMaskIntoConstraints = false
+        disconnectButton.topAnchor.constraint(equalTo: efficiencyLabel.bottomAnchor, constant: 20).isActive = true
+        disconnectButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
     }
     
     func connect(_ connection: Connect, failedToConnectToHost host: String, withError error: Error?) {
