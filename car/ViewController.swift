@@ -70,7 +70,7 @@ class ViewController: UIViewController, ConnectDelegate {
     }
     
     @objc func buttonAction(sender: UIButton!) {
-        print("CLICKED")
+        print("Trying to connect")
         if connection.isConnected {
             connection.disconnect()
         } else {
@@ -296,10 +296,23 @@ class ViewController: UIViewController, ConnectDelegate {
     
     func connect(_ connection: Connect, didConnectToHost host: String) {
         print("Connected to \(host)")
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+            connection.send(command: AdHocCommand.initiate)
+        }
+
     }
-    
+    private let formatter = MeasurementFormatter()
+
     func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
         print("Received Data:", dataCollection)
+        
+        guard let data = dataCollection.data(for: connection.pid) else { return }
+        if let message = (data as? [OdometerMessage])?.last {
+            speedResult.text = {
+                let velocity = Measurement(value: Double(message.velocity), unit: UnitSpeed.kilometersPerHour)
+                return "\(velocity)"//formatter.string(from: velocity)
+            }()
+        }
     }
     
     func connect(_ connection: Connect, failedToSendCommand command: ATCommandProtocol, dueToErrorOfKind kind: CommandError) {

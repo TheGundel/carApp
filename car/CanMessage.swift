@@ -69,7 +69,9 @@ struct OdometerMessage: CanMessage {
     let milage: Int
     
     init(data: [UInt8]) {
-        velocity = hexInt(from: data[3..<7]) - 0xFE00
+        velocity = hexInt(from: data[5..<7])// - 0xFE00
+        print(hexInt(from: data[5..<7]))
+        
         milage = hexInt(from: data[7..<13])
     }
     
