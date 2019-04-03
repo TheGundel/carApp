@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		56196FA22254D4730069F3A7 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56196FA12254D4730069F3A7 /* StopWatch.swift */; };
 		56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C43759224A513100E330A5 /* DriveViewController.swift */; };
 		56CEB0C92239306500606D3A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0C82239306500606D3A /* Protocols.swift */; };
 		56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0EC22393D9500606D3A /* StartViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		56196FA12254D4730069F3A7 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		56C43759224A513100E330A5 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
 		56CEB0C82239306500606D3A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		56CEB0EC22393D9500606D3A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 				56CEB0C82239306500606D3A /* Protocols.swift */,
 				56CEB0EC22393D9500606D3A /* StartViewController.swift */,
 				56C43759224A513100E330A5 /* DriveViewController.swift */,
+				56196FA12254D4730069F3A7 /* StopWatch.swift */,
 			);
 			path = car;
 			sourceTree = "<group>";
@@ -160,6 +163,7 @@
 				56CEB0C92239306500606D3A /* Protocols.swift in Sources */,
 				56E426F12238045B0096895F /* DataProcessor.swift in Sources */,
 				56E426EB223800810096895F /* Connect.swift in Sources */,
+				56196FA22254D4730069F3A7 /* StopWatch.swift in Sources */,
 				56E426ED223802150096895F /* Commands.swift in Sources */,
 				56E426EF223802870096895F /* CanMessage.swift in Sources */,
 			);
