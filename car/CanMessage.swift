@@ -25,7 +25,9 @@ enum PID: String, Codable {
     case ac = "3A4" // TODO?
     case shift = "418" // Gear
     case odometer = "412"
-    case chargeLevel = "374"
+    //Try and use 2D5 - Brug D4 & D5 : Udregnes ved D4+D5(hex -> omregn til decimal) / 10
+    //518 kan være eco % ? 
+    case chargeLevel = "2D5"
     case powerUsage = "346"
     //case wheelPosition = "0C2" // "236" TODO?
     
@@ -69,9 +71,7 @@ struct OdometerMessage: CanMessage {
     let milage: Int
     
     init(data: [UInt8]) {
-        velocity = hexInt(from: data[5..<7])// - 0xFE00
-        print(hexInt(from: data[5..<7]))
-        
+        velocity = hexInt(from: data[5..<7])
         milage = hexInt(from: data[7..<13])
     }
     
@@ -192,7 +192,7 @@ struct BatteryLevelMessage: CanMessage {
     let level: Double
     
     init(data: [UInt8]) {
-        level = hexDouble(from: data[5..<7]) * 0.5 - 5.0
+        level = hexDouble(from: data[12..<15]) / 10
     }
     
     var description: String {
