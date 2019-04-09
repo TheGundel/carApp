@@ -9,19 +9,22 @@
 import Foundation
 import UIKit
 
-class StartViewController: UIViewController {
+class StartViewController: UIViewController, ConnectDelegate {
     
     let logo = UIImageView()
     let name = UILabel()
     let startLabel = UILabel()
     let startBtn = UIButton()
-    let stopBtn = UIButton()
+    private var connection: Connect!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupView()
         setupConstraints()
+        
+        connection = Connect()
+        connection.delegate = self
     }
     
     func setupView() {
@@ -35,7 +38,7 @@ class StartViewController: UIViewController {
         view.addSubview(logo)
         view.addSubview(name)
         
-        startLabel.text = "Start calculations" //maybe a better text here
+        startLabel.text = "Start collecting data"
         startLabel.font = UIFont.boldSystemFont(ofSize: 14)
         
         view.addSubview(startLabel)
@@ -45,17 +48,9 @@ class StartViewController: UIViewController {
         startBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
         startBtn.layer.cornerRadius = 25
         startBtn.clipsToBounds = true
-        startBtn.addTarget(self, action: #selector(openNewVC(sender:)), for: .touchUpInside)
-        
-        stopBtn.backgroundColor = .red
-        stopBtn.setTitle("Stop", for: .normal)
-        stopBtn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
-        stopBtn.layer.cornerRadius = 25
-        stopBtn.clipsToBounds = true
-        //stopBtn.addTarget(self, action: #selector(openNewVC(sender:)), for: .touchUpInside)
+        startBtn.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
         
         view.addSubview(startBtn)
-        view.addSubview(stopBtn)
     }
     
     func setupConstraints() {
@@ -84,6 +79,68 @@ class StartViewController: UIViewController {
     @objc func openNewVC(sender: UIButton!) {
         let vc = ViewController()
         present(vc, animated: false, completion: nil)
+    }
+    
+    @objc func buttonAction(sender: UIButton!) {
+        print("Trying to connect")
+        startLabel.text = "Trying to connect..."
+        if connection.isConnected {
+            connection.disconnect()
+        } else {
+            connection.connect()
+            if connection.isConnected {
+                let vc = ViewController()
+                present(vc, animated: false, completion: nil)
+            }
+        }
+    }
+    
+    func connect(_ connection: Connect, failedToConnectToHost host: String, withError error: Error?) {
+        print("Failed to connect to \(host) reason: \(error?.localizedDescription ?? "")")
+        
+        let alert = UIAlertController(title: "Failed to Connect", message: "Failed to connect to OBD, please check your connection and try again.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
+        self.present(alert, animated: true)
+        
+        startLabel.text = "Start collecting data"
+        
+    }
+    
+    func connect(_ connection: Connect, didConnectToHost host: String) {
+        print("Connected to \(host)")
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+            connection.send(command: AdHocCommand.initiate)
+        }
+        let vc = ViewController()
+        present(vc, animated: false, completion: nil)
+    }
+    
+    func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
+        print("Received Data:", dataCollection)
+        
+        //guard let data = dataCollection.data(for: connection.pid) else { return }
+//        if let message = (data as? [OdometerMessage])?.last {
+//            speedResult.text = {
+//                let velocity = Measurement(value: Double(message.velocity), unit: UnitSpeed.kilometersPerHour)
+//                return "\(velocity)"//formatter.string(from: velocity)
+//            }()
+//        }
+    }
+    
+    func connect(_ connection: Connect, failedToSendCommand command: ATCommandProtocol, dueToErrorOfKind kind: CommandError) {
+        print("Failed to send ATCommand: \(command) reason: \(kind)")
+    }
+    
+    func connect(_ connection: Connect, didEncounterReadError error: Error) {
+        print("Read error, reason: \(error)")
+    }
+    
+    func connectDidReceiveEndEncountered(_ connection: Connect) {
+        print("Received end encounter")
+    }
+    
+    func connect(_ connection: Connect, didDisconnectFromHost host: String) {
+        print("Disconnected from \(host)")
     }
     
 }

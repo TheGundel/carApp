@@ -70,15 +70,6 @@ class ViewController: UIViewController, ConnectDelegate {
         
     }
     
-    @objc func buttonAction(sender: UIButton!) {
-        print("Trying to connect")
-        if connection.isConnected {
-            connection.disconnect()
-        } else {
-            connection.connect()
-        }
-    }
-    
     @objc func disconnect(sender: UIButton!) {
         print("Trying to disconnect")
         if connection.isConnected {
@@ -88,11 +79,11 @@ class ViewController: UIViewController, ConnectDelegate {
     
     func setupView() {
         
-        connectButton.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
-        connectButton.backgroundColor = .green
-        connectButton.setTitle("Connect", for: .normal)
-        connectButton.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
-        scrollView.addSubview(connectButton)
+//        connectButton.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
+//        connectButton.backgroundColor = .green
+//        connectButton.setTitle("Connect", for: .normal)
+//        connectButton.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
+//        scrollView.addSubview(connectButton)
         
         disconnectButton.frame = CGRect(x: 0, y: 0, width: 150, height: 100)
         disconnectButton.backgroundColor = .red
@@ -299,9 +290,9 @@ class ViewController: UIViewController, ConnectDelegate {
         efficiencyResult.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 30).isActive = true
         efficiencyResult.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -30).isActive = true
         
-        connectButton.translatesAutoresizingMaskIntoConstraints = false
-        connectButton.topAnchor.constraint(equalTo: efficiencyLabel.bottomAnchor, constant: 20).isActive = true
-        connectButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
+//        connectButton.translatesAutoresizingMaskIntoConstraints = false
+//        connectButton.topAnchor.constraint(equalTo: efficiencyLabel.bottomAnchor, constant: 20).isActive = true
+//        connectButton.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 30).isActive = true
         
         disconnectButton.translatesAutoresizingMaskIntoConstraints = false
         disconnectButton.topAnchor.constraint(equalTo: efficiencyLabel.bottomAnchor, constant: 20).isActive = true
@@ -319,7 +310,7 @@ class ViewController: UIViewController, ConnectDelegate {
         }
 
     }
-    private let formatter = MeasurementFormatter()
+    //private let formatter = MeasurementFormatter()
 
     func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
         print("Received Data:", dataCollection)
