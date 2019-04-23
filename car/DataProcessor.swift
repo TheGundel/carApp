@@ -37,18 +37,10 @@ struct DataProcessor {
             let canMessage: CanMessage
             
             switch pid {
-            case .brakeLevel:
-                canMessage = BrakeMessage(data: line)
             case .odometer:
                 canMessage = OdometerMessage(data: line)
-            case .ac:
-                canMessage = ACMessage(data: line)
-            case .shift:
-                canMessage = ShiftMessage(data: line)
             case .powerUsage:
                 canMessage = PowerUsageMessage(data: line)
-                //            case .wheelPosition:
-            //                canMessage = SteeringWheelMessage(data: line)
             case .chargeLevel:
                 canMessage = BatteryLevelMessage(data: line)
             }

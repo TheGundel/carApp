@@ -10,14 +10,6 @@ import UIKit
 
 class DriveViewController: UIViewController, ConnectDelegate {
     
-//    var scrollView: UIScrollView = {
-//        let view = UIScrollView()
-//        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.contentSize.height = 1500
-//
-//        return view
-//    }()
-    
     let topbar = UIImageView()
     let logo = UIImageView()
     let name = UILabel()
@@ -52,13 +44,13 @@ class DriveViewController: UIViewController, ConnectDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        //view.addSubview(scrollView)
         setupScrollView()
         setupView()
         setupConstraints()
         
         connection = Connect()
         connection.delegate = self
+        
     }
     
     func setupScrollView() {
@@ -150,7 +142,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
         disconnectButton.layer.cornerRadius = 25
         disconnectButton.addTarget(self, action: #selector(disconnect(sender:)), for: .touchUpInside)
         view.addSubview(disconnectButton)
-    
+
     }
     
     func setupConstraints() {
@@ -251,7 +243,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
     var timer: Timer?
     var time: TimeInterval = 5.0
     
-    @objc func PIDChange() {
+    func PIDChange() {
         if(running && connection.isConnected){
             if(timer == nil){
                 timer = Timer.scheduledTimer(withTimeInterval: time, repeats: true) { _ in
@@ -268,14 +260,12 @@ class DriveViewController: UIViewController, ConnectDelegate {
                         self.PIDChange()
                     }
                 }
-
             }
-                }
+        }
         if(running == false){
             running = true
         }
     }
-    
     
     @objc func connect(sender: UIButton!) {
         print("Trying to connect")
@@ -394,7 +384,5 @@ class DriveViewController: UIViewController, ConnectDelegate {
         connectButton.isHidden = false
         disconnectButton.isHidden = true
     }
-    
-    
 }
 
