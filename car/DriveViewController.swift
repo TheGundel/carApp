@@ -244,7 +244,38 @@ class DriveViewController: UIViewController, ConnectDelegate {
         startLabel.translatesAutoresizingMaskIntoConstraints = false
         startLabel.bottomAnchor.constraint(equalTo: connectButton.topAnchor, constant: -10).isActive = true
         startLabel.centerXAnchor.constraint(equalTo: connectButton.centerXAnchor).isActive = true
+
     }
+    
+    var running = false
+    var timer: Timer?
+    var time: TimeInterval = 5.0
+    
+    @objc func PIDChange() {
+        if(running && connection.isConnected){
+            if(timer == nil){
+                timer = Timer.scheduledTimer(withTimeInterval: time, repeats: true) { _ in
+                    if(!self.connection.isConnected){
+                        if(self.timer != nil){
+                            self.timer!.invalidate()
+                            self.timer = nil
+                        }
+                    } else {
+                        self.connection.changePID()
+                        self.time = self.connection.getPID() == .odometer ? 1.0 : 5.0
+                        self.timer!.invalidate()
+                        self.timer = nil
+                        self.PIDChange()
+                    }
+                }
+
+            }
+                }
+        if(running == false){
+            running = true
+        }
+    }
+    
     
     @objc func connect(sender: UIButton!) {
         print("Trying to connect")
@@ -254,9 +285,9 @@ class DriveViewController: UIViewController, ConnectDelegate {
         } else {
             connection.connect()
         }
+        
         if connection.isConnected {
-            Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateElapsedTimeLabel), userInfo: nil, repeats: true)
-            watch.start()
+            print("Hej")
         }
     }
     
@@ -298,6 +329,8 @@ class DriveViewController: UIViewController, ConnectDelegate {
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             connection.send(command: AdHocCommand.initiate)
         }
+        //Change PID after initial setup connection
+        PIDChange()
         
         //Change button to disconnect btn
         startLabel.text = "Stop collecting data"
@@ -310,6 +343,10 @@ class DriveViewController: UIViewController, ConnectDelegate {
     private let formatter = MeasurementFormatter()
     
     func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
+        if(!watch.isRunning){
+            watch.start()
+            Timer.scheduledTimer(timeInterval: 0.01, target: self, selector: #selector(updateElapsedTimeLabel), userInfo: nil, repeats: true)
+        }
         print("Received Data:", dataCollection)
         
         guard let data = dataCollection.data(for: connection.pid) else { return }

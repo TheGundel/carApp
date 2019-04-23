@@ -66,13 +66,17 @@ class Connect: NSObject {
     
     public func disconnect() {
         guard inputStream.streamStatus != .closed, outputStream.streamStatus != .closed else { return }
-        
+        send(command: AdHocCommand.stopRead)
         inputStream.close()
         outputStream.close()
         
         delegate?.connect(self, didDisconnectFromHost: host)
         
         last = nil
+    }
+    
+    public func getPID() -> PID{
+        return currentPID
     }
     
     
@@ -92,8 +96,14 @@ class Connect: NSObject {
         case ConfigurationCommand.setPID(let pid):
             currentPID = pid
             if commandsQueue.isEmpty {
-                commandsQueue = [AdHocCommand.read]
+                commandsQueue = [
+                    ConfigurationCommand.setPID(pid),
+                    AdHocCommand.read]
+                handleQueue()
+                return
             }
+            
+            
         case let initiate as AdHocCommand where initiate == AdHocCommand.initiate:
             runSetup()
             return
@@ -105,6 +115,23 @@ class Connect: NSObject {
         last = command
         let data = command.data
         _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
+    }
+   
+    func changePID(){
+        if(!commandsQueue.isEmpty){
+            return
+        }
+                
+        send(command: AdHocCommand.stopRead)
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+        if(self.currentPID == .chargeLevel){
+            self.commandsQueue = [ConfigurationCommand.setPID(.odometer), AdHocCommand.read]
+
+        } else {
+            self.commandsQueue = [ConfigurationCommand.setPID(.chargeLevel), AdHocCommand.read]
+        }
+        self.handleQueue()
+        }
     }
     
     private func runSetup() {
@@ -178,7 +205,8 @@ extension Connect: StreamDelegate {
             
             // Decode the configuration response
             if lastCommand is ConfigurationCommandProtocol, !dataProcessor.supports(buffer) {
-                print(String(bytes: buffer, encoding: .ascii) ?? "Unable to decode response")
+                let response = (String(bytes: buffer, encoding: .ascii)) ?? "Unable to decode response"
+                print("Response: \(response)")
                 
                 // Postponing the next action, in order not to flood the hardware
                 Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
