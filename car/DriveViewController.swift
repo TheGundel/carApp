@@ -339,6 +339,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
         
     }
     
+    var startMilage = Measurement(value: 0, unit: UnitLength.kilometers)
     
     private let formatter = MeasurementFormatter()
     
@@ -355,9 +356,12 @@ class DriveViewController: UIViewController, ConnectDelegate {
                 let velocity = Measurement(value: Double(message.velocity), unit: UnitSpeed.kilometersPerHour)
                 return "\(velocity)"
             }()
-            
             mapResult.text = {
-                let milage = Measurement(value: Double(message.milage), unit: UnitLength.kilometers)
+                if(mapResult.text == "0 km"){
+                    startMilage = Measurement(value: Double(message.milage), unit: UnitLength.kilometers)
+                }
+                
+                let milage = Measurement(value: Double(message.milage), unit: UnitLength.kilometers) - startMilage
                 return "\(milage)"
             }()
             
