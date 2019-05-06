@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		56196FA22254D4730069F3A7 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56196FA12254D4730069F3A7 /* StopWatch.swift */; };
 		564EE236227865B80074CF1E /* car.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 564EE234227865B80074CF1E /* car.xcdatamodeld */; };
+		564EE2382280238C0074CF1E /* SumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564EE2372280238C0074CF1E /* SumViewController.swift */; };
 		56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C43759224A513100E330A5 /* DriveViewController.swift */; };
 		56CEB0C92239306500606D3A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0C82239306500606D3A /* Protocols.swift */; };
 		56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0EC22393D9500606D3A /* StartViewController.swift */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		56196FA12254D4730069F3A7 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		564EE235227865B80074CF1E /* car.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = car.xcdatamodel; sourceTree = "<group>"; };
+		564EE2372280238C0074CF1E /* SumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumViewController.swift; sourceTree = "<group>"; };
 		56C43759224A513100E330A5 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
 		56CEB0C82239306500606D3A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		56CEB0EC22393D9500606D3A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			files = (
 				56FEA7DA222545B50055CFDD /* ViewController.swift in Sources */,
 				56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */,
+				564EE2382280238C0074CF1E /* SumViewController.swift in Sources */,
 				56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */,
 				56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */,
 				56CEB0C92239306500606D3A /* Protocols.swift in Sources */,
