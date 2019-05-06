@@ -288,6 +288,48 @@ class DriveViewController: UIViewController, ConnectDelegate {
             connection.disconnect()
         }
         watch.stop()
+        
+        // Calculate the battery usage
+        let subS = String(batteryLifeResult.text!.dropLast(2))
+        let endBat = Double(subS)
+        let batteryUsage = startBat - endBat!
+        
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        
+        //Deletes old core data before adding new data
+        do {
+            var summary: [Summary] = []
+            summary = try context.fetch(Summary.fetchRequest())
+            if(summary.count > 0){
+                for sum in summary{
+                    context.delete(sum)
+                }
+            }
+        } catch {
+            print("Fetching Failed")
+        }
+        
+        let sum = Summary(context: context) // Link Summary & Context
+        
+        //Add data results
+        sum.distance = mapResult.text
+        sum.battery = batteryLifeResult.text
+        sum.time = timeResult.text
+        sum.batteryUsage = batteryUsage
+        
+        // Save the data to coredata
+        (UIApplication.shared.delegate as! AppDelegate).saveContext()
+        
+        do {
+            try context.save()
+        } catch {
+            let nserror = error as NSError
+            fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+        }
+        
+        //Push new viewController
+        let vc = SumViewController()
+        present(vc, animated: false, completion: nil)
     }
     
     @objc func updateElapsedTimeLabel(timer : Timer) {
@@ -330,6 +372,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
     }
     
     var startMilage = Measurement(value: 0, unit: UnitLength.kilometers)
+    var startBat = Double()
     
     private let formatter = MeasurementFormatter()
     
@@ -359,6 +402,9 @@ class DriveViewController: UIViewController, ConnectDelegate {
         if let message = (data as? [BatteryLevelMessage])?.last {
             batteryLifeResult.text = {
                 let batteryLife = message.level
+                if(batteryLifeResult.text == "00 %"){
+                    startBat = message.level
+                }
                 return "\(batteryLife) %"
             }()
         }

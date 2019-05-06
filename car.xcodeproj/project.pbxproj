@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		56196FA22254D4730069F3A7 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56196FA12254D4730069F3A7 /* StopWatch.swift */; };
+		564EE236227865B80074CF1E /* car.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 564EE234227865B80074CF1E /* car.xcdatamodeld */; };
 		56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C43759224A513100E330A5 /* DriveViewController.swift */; };
 		56CEB0C92239306500606D3A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0C82239306500606D3A /* Protocols.swift */; };
 		56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0EC22393D9500606D3A /* StartViewController.swift */; };
@@ -23,6 +24,7 @@
 
 /* Begin PBXFileReference section */
 		56196FA12254D4730069F3A7 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
+		564EE235227865B80074CF1E /* car.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = car.xcdatamodel; sourceTree = "<group>"; };
 		56C43759224A513100E330A5 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
 		56CEB0C82239306500606D3A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		56CEB0EC22393D9500606D3A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 		56FEA7D6222545B50055CFDD /* car */ = {
 			isa = PBXGroup;
 			children = (
+				564EE234227865B80074CF1E /* car.xcdatamodeld */,
 				56E426EA2238007E0096895F /* Connect.swift */,
 				56FEA7D7222545B50055CFDD /* AppDelegate.swift */,
 				56FEA7D9222545B50055CFDD /* ViewController.swift */,
@@ -161,6 +164,7 @@
 				56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */,
 				56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */,
 				56CEB0C92239306500606D3A /* Protocols.swift in Sources */,
+				564EE236227865B80074CF1E /* car.xcdatamodeld in Sources */,
 				56E426F12238045B0096895F /* DataProcessor.swift in Sources */,
 				56E426EB223800810096895F /* Connect.swift in Sources */,
 				56196FA22254D4730069F3A7 /* StopWatch.swift in Sources */,
@@ -350,6 +354,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		564EE234227865B80074CF1E /* car.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				564EE235227865B80074CF1E /* car.xcdatamodel */,
+			);
+			currentVersion = 564EE235227865B80074CF1E /* car.xcdatamodel */;
+			path = car.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 56FEA7CC222545B50055CFDD /* Project object */;
 }
