@@ -39,8 +39,6 @@ struct DataProcessor {
             switch pid {
             case .odometer:
                 canMessage = OdometerMessage(data: line)
-            case .powerUsage:
-                canMessage = PowerUsageMessage(data: line)
             case .chargeLevel:
                 canMessage = BatteryLevelMessage(data: line)
             }

@@ -10,6 +10,8 @@
 		56196FA22254D4730069F3A7 /* StopWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56196FA12254D4730069F3A7 /* StopWatch.swift */; };
 		564EE236227865B80074CF1E /* car.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 564EE234227865B80074CF1E /* car.xcdatamodeld */; };
 		564EE2382280238C0074CF1E /* SumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564EE2372280238C0074CF1E /* SumViewController.swift */; };
+		564EE23F228060A10074CF1E /* DriveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564EE23E228060A10074CF1E /* DriveView.swift */; };
+		564EE242228065330074CF1E /* SumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564EE241228065330074CF1E /* SumView.swift */; };
 		56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C43759224A513100E330A5 /* DriveViewController.swift */; };
 		56CEB0C92239306500606D3A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0C82239306500606D3A /* Protocols.swift */; };
 		56E426EB223800810096895F /* Connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EA2238007E0096895F /* Connect.swift */; };
@@ -25,6 +27,8 @@
 		56196FA12254D4730069F3A7 /* StopWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatch.swift; sourceTree = "<group>"; };
 		564EE235227865B80074CF1E /* car.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = car.xcdatamodel; sourceTree = "<group>"; };
 		564EE2372280238C0074CF1E /* SumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumViewController.swift; sourceTree = "<group>"; };
+		564EE23E228060A10074CF1E /* DriveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveView.swift; sourceTree = "<group>"; };
+		564EE241228065330074CF1E /* SumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumView.swift; sourceTree = "<group>"; };
 		56C43759224A513100E330A5 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
 		56CEB0C82239306500606D3A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		56E426EA2238007E0096895F /* Connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connect.swift; sourceTree = "<group>"; };
@@ -85,6 +89,15 @@
 			path = "CANBUS Translater";
 			sourceTree = "<group>";
 		};
+		564EE240228064E60074CF1E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				564EE23E228060A10074CF1E /* DriveView.swift */,
+				564EE241228065330074CF1E /* SumView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		56FEA7CB222545B50055CFDD = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +121,7 @@
 				56FEA7D7222545B50055CFDD /* AppDelegate.swift */,
 				56FEA7E0222545BA0055CFDD /* LaunchScreen.storyboard */,
 				564EE239228024190074CF1E /* View Controllers */,
+				564EE240228064E60074CF1E /* Views */,
 				564EE23C22803B2D0074CF1E /* CANBUS Connector */,
 				564EE23D22803B380074CF1E /* CANBUS Translater */,
 				564EE23A228024440074CF1E /* Helpers */,
@@ -192,8 +206,10 @@
 				56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */,
 				56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */,
 				56CEB0C92239306500606D3A /* Protocols.swift in Sources */,
+				564EE242228065330074CF1E /* SumView.swift in Sources */,
 				564EE236227865B80074CF1E /* car.xcdatamodeld in Sources */,
 				56E426F12238045B0096895F /* DataProcessor.swift in Sources */,
+				564EE23F228060A10074CF1E /* DriveView.swift in Sources */,
 				56E426EB223800810096895F /* Connect.swift in Sources */,
 				56196FA22254D4730069F3A7 /* StopWatch.swift in Sources */,
 				56E426ED223802150096895F /* Commands.swift in Sources */,
