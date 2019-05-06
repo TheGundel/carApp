@@ -12,13 +12,11 @@
 		564EE2382280238C0074CF1E /* SumViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564EE2372280238C0074CF1E /* SumViewController.swift */; };
 		56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C43759224A513100E330A5 /* DriveViewController.swift */; };
 		56CEB0C92239306500606D3A /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0C82239306500606D3A /* Protocols.swift */; };
-		56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CEB0EC22393D9500606D3A /* StartViewController.swift */; };
 		56E426EB223800810096895F /* Connect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EA2238007E0096895F /* Connect.swift */; };
 		56E426ED223802150096895F /* Commands.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EC223802150096895F /* Commands.swift */; };
 		56E426EF223802870096895F /* CanMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426EE223802870096895F /* CanMessage.swift */; };
 		56E426F12238045B0096895F /* DataProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E426F02238045B0096895F /* DataProcessor.swift */; };
 		56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FEA7D7222545B50055CFDD /* AppDelegate.swift */; };
-		56FEA7DA222545B50055CFDD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56FEA7D9222545B50055CFDD /* ViewController.swift */; };
 		56FEA7DF222545BA0055CFDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56FEA7DE222545BA0055CFDD /* Assets.xcassets */; };
 		56FEA7E2222545BA0055CFDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56FEA7E0222545BA0055CFDD /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -29,14 +27,12 @@
 		564EE2372280238C0074CF1E /* SumViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumViewController.swift; sourceTree = "<group>"; };
 		56C43759224A513100E330A5 /* DriveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriveViewController.swift; sourceTree = "<group>"; };
 		56CEB0C82239306500606D3A /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
-		56CEB0EC22393D9500606D3A /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		56E426EA2238007E0096895F /* Connect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connect.swift; sourceTree = "<group>"; };
 		56E426EC223802150096895F /* Commands.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commands.swift; sourceTree = "<group>"; };
 		56E426EE223802870096895F /* CanMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanMessage.swift; sourceTree = "<group>"; };
 		56E426F02238045B0096895F /* DataProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProcessor.swift; sourceTree = "<group>"; };
 		56FEA7D4222545B50055CFDD /* car.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = car.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		56FEA7D7222545B50055CFDD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		56FEA7D9222545B50055CFDD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		56FEA7DE222545BA0055CFDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56FEA7E1222545BA0055CFDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56FEA7E3222545BA0055CFDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -53,6 +49,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		564EE239228024190074CF1E /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				56C43759224A513100E330A5 /* DriveViewController.swift */,
+				564EE2372280238C0074CF1E /* SumViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		564EE23A228024440074CF1E /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				56196FA12254D4730069F3A7 /* StopWatch.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		564EE23C22803B2D0074CF1E /* CANBUS Connector */ = {
+			isa = PBXGroup;
+			children = (
+				56CEB0C82239306500606D3A /* Protocols.swift */,
+				56E426EA2238007E0096895F /* Connect.swift */,
+				56E426EC223802150096895F /* Commands.swift */,
+			);
+			path = "CANBUS Connector";
+			sourceTree = "<group>";
+		};
+		564EE23D22803B380074CF1E /* CANBUS Translater */ = {
+			isa = PBXGroup;
+			children = (
+				56E426F02238045B0096895F /* DataProcessor.swift */,
+				56E426EE223802870096895F /* CanMessage.swift */,
+			);
+			path = "CANBUS Translater";
+			sourceTree = "<group>";
+		};
 		56FEA7CB222545B50055CFDD = {
 			isa = PBXGroup;
 			children = (
@@ -73,19 +105,14 @@
 			isa = PBXGroup;
 			children = (
 				564EE234227865B80074CF1E /* car.xcdatamodeld */,
-				56E426EA2238007E0096895F /* Connect.swift */,
 				56FEA7D7222545B50055CFDD /* AppDelegate.swift */,
-				56FEA7D9222545B50055CFDD /* ViewController.swift */,
-				56FEA7DE222545BA0055CFDD /* Assets.xcassets */,
 				56FEA7E0222545BA0055CFDD /* LaunchScreen.storyboard */,
+				564EE239228024190074CF1E /* View Controllers */,
+				564EE23C22803B2D0074CF1E /* CANBUS Connector */,
+				564EE23D22803B380074CF1E /* CANBUS Translater */,
+				564EE23A228024440074CF1E /* Helpers */,
+				56FEA7DE222545BA0055CFDD /* Assets.xcassets */,
 				56FEA7E3222545BA0055CFDD /* Info.plist */,
-				56E426EC223802150096895F /* Commands.swift */,
-				56E426EE223802870096895F /* CanMessage.swift */,
-				56E426F02238045B0096895F /* DataProcessor.swift */,
-				56CEB0C82239306500606D3A /* Protocols.swift */,
-				56CEB0EC22393D9500606D3A /* StartViewController.swift */,
-				56C43759224A513100E330A5 /* DriveViewController.swift */,
-				56196FA12254D4730069F3A7 /* StopWatch.swift */,
 			);
 			path = car;
 			sourceTree = "<group>";
@@ -161,8 +188,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56FEA7DA222545B50055CFDD /* ViewController.swift in Sources */,
-				56CEB0ED22393D9500606D3A /* StartViewController.swift in Sources */,
 				564EE2382280238C0074CF1E /* SumViewController.swift in Sources */,
 				56C4375A224A513100E330A5 /* DriveViewController.swift in Sources */,
 				56FEA7D8222545B50055CFDD /* AppDelegate.swift in Sources */,
