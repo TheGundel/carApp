@@ -18,19 +18,16 @@ class DriveViewController: UIViewController, ConnectDelegate {
     let mapIcon = UIImageView()
     let timeIcon = UIImageView()
     let speedIcon = UIImageView()
-    //let batteryUsageIcon = UIImageView()
     let batteryLifeIcon = UIImageView()
     
     let mapText = UILabel()
     let timeText = UILabel()
     let speedText = UILabel()
-    //let batteryUsageText = UILabel()
     let batteryLifeText = UILabel()
     
     let mapResult = UILabel()
     let timeResult = UILabel()
     let speedResult = UILabel()
-    //let batteryUsageResult = UILabel()
     let batteryLifeResult = UILabel()
     
     let watch = StopWatch()
@@ -44,20 +41,12 @@ class DriveViewController: UIViewController, ConnectDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        setupScrollView()
+        
         setupView()
         setupConstraints()
         
         connection = Connect()
         connection.delegate = self
-        
-    }
-    
-    func setupScrollView() {
-        view.topAnchor.constraint(equalTo: view.topAnchor, constant: 60).isActive = true
-        view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        view.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        view.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
     }
     
@@ -142,7 +131,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
         disconnectButton.layer.cornerRadius = 25
         disconnectButton.addTarget(self, action: #selector(disconnect(sender:)), for: .touchUpInside)
         view.addSubview(disconnectButton)
-
+        
     }
     
     func setupConstraints() {
@@ -236,13 +225,14 @@ class DriveViewController: UIViewController, ConnectDelegate {
         startLabel.translatesAutoresizingMaskIntoConstraints = false
         startLabel.bottomAnchor.constraint(equalTo: connectButton.topAnchor, constant: -10).isActive = true
         startLabel.centerXAnchor.constraint(equalTo: connectButton.centerXAnchor).isActive = true
-
+        
     }
     
     var running = false
     var timer: Timer?
     var time: TimeInterval = 5.0
     
+    //Change PID between odometer and battery
     func PIDChange() {
         if(running && connection.isConnected){
             if(timer == nil){
@@ -274,10 +264,6 @@ class DriveViewController: UIViewController, ConnectDelegate {
             connection.disconnect()
         } else {
             connection.connect()
-        }
-        
-        if connection.isConnected {
-            print("Hej")
         }
     }
     
@@ -332,6 +318,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
         present(vc, animated: false, completion: nil)
     }
     
+    //Update stop watch
     @objc func updateElapsedTimeLabel(timer : Timer) {
         if watch.isRunning {
             let minutes = Int(watch.elapsedTime / 60)
@@ -352,28 +339,28 @@ class DriveViewController: UIViewController, ConnectDelegate {
         alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: nil))
         self.present(alert, animated: true)
         
-        //Reset label
+        //Reset info label
         startLabel.text = "Start collecting data"
     }
     
     func connect(_ connection: Connect, didConnectToHost host: String) {
         print("Connected to \(host)")
+        
+        //Perform setup for receiving data
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
             connection.send(command: AdHocCommand.initiate)
         }
         //Change PID after initial setup connection
         PIDChange()
         
-        //Change button to disconnect btn
+        //Change button to disconnect button
         startLabel.text = "Stop collecting data"
         connectButton.isHidden = true
         disconnectButton.isHidden = false
-        
     }
     
     var startMilage = Measurement(value: 0, unit: UnitLength.kilometers)
     var startBat = Double()
-    
     private let formatter = MeasurementFormatter()
     
     func connect(_ connection: Connect, didReceiveDataCollection dataCollection: CanMessageCollection) {
@@ -431,4 +418,3 @@ class DriveViewController: UIViewController, ConnectDelegate {
         disconnectButton.isHidden = true
     }
 }
-

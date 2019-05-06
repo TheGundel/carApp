@@ -57,7 +57,4 @@ struct DataProcessor {
         }
         return false
     }
-    
 }
-
-

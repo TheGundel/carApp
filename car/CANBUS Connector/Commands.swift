@@ -96,7 +96,6 @@ enum ConfigurationCommand: ConfigurationCommandProtocol, Equatable {
     static func ==(lhs: ConfigurationCommand, rhs: ConfigurationCommand) -> Bool {
         return lhs.message == rhs.message
     }
-    
 }
 
 /**
@@ -126,5 +125,4 @@ struct AdHocCommand: ATCommandProtocol, Equatable {
     static func ==(lhs: AdHocCommand, rhs: AdHocCommand) -> Bool {
         return lhs.message == rhs.message
     }
-    
 }

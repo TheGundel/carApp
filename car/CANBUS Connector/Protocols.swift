@@ -43,5 +43,3 @@ protocol ConnectDelegate: class {
     //Disconnect the host
     func connect(_ connection: Connect, didDisconnectFromHost host: String)
 }
-
-

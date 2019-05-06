@@ -47,7 +47,7 @@ class SumViewController: UIViewController {
     
     let efficiencyExplain = UILabel()
     let separator = UIView()
-    let disconnectButton = UIButton()
+    let resetButton = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +59,7 @@ class SumViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getData()
+        getCoreData()
         updateView()
     }
     
@@ -172,11 +172,11 @@ class SumViewController: UIViewController {
         efficiencyExplain.numberOfLines = 0
         scrollView.addSubview(efficiencyExplain)
         
-        disconnectButton.backgroundColor = UIColor(red:0.44, green:0.75, blue:0.13, alpha:1.0)
-        disconnectButton.layer.cornerRadius = 25
-        disconnectButton.setTitle("Start new drive", for: .normal)
-        disconnectButton.addTarget(self, action: #selector(disconnect(sender:)), for: .touchUpInside)
-        view.addSubview(disconnectButton)
+        resetButton.backgroundColor = UIColor(red:0.44, green:0.75, blue:0.13, alpha:1.0)
+        resetButton.layer.cornerRadius = 25
+        resetButton.setTitle("Start new drive", for: .normal)
+        resetButton.addTarget(self, action: #selector(reset(sender:)), for: .touchUpInside)
+        view.addSubview(resetButton)
     }
     
     func setupConstraints() {
@@ -293,19 +293,17 @@ class SumViewController: UIViewController {
         
         efficiencyExplain.translatesAutoresizingMaskIntoConstraints = false
         efficiencyExplain.topAnchor.constraint(equalTo: separator.bottomAnchor, constant: 20).isActive = true
-        //efficiencyExplain.widthAnchor.constraint(equalToConstant: 300).isActive = true
         efficiencyExplain.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 20).isActive = true
         efficiencyExplain.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -20).isActive = true
         
-        disconnectButton.translatesAutoresizingMaskIntoConstraints = false
-        disconnectButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
-        disconnectButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        disconnectButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        disconnectButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
+        resetButton.translatesAutoresizingMaskIntoConstraints = false
+        resetButton.widthAnchor.constraint(equalToConstant: 300).isActive = true
+        resetButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        resetButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        resetButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
     }
     
-    @objc func disconnect(sender: UIButton!) {
-        //Push new view controller
+    @objc func reset(sender: UIButton!) {
         let vc = DriveViewController()
         present(vc, animated: false, completion: nil)
     }
@@ -313,8 +311,7 @@ class SumViewController: UIViewController {
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var summary: [Summary] = []
     
-    func getData() {
-        
+    func getCoreData() {
         do {
             summary = try context.fetch(Summary.fetchRequest())
             print(summary.count)

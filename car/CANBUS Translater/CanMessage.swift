@@ -21,16 +21,13 @@ extension CanMessage {
 enum PID: String, Codable {
     case odometer = "412"
     case chargeLevel = "2D5"
-    case powerUsage = "346"
     
     var identifier: String {
         switch self {
         case .chargeLevel: return "Battery Level"
         case .odometer: return "Odometer"
-        case .powerUsage: return "Power Usage"
         }
     }
-    
 }
 
 struct OdometerMessage: CanMessage {
@@ -52,36 +49,6 @@ struct OdometerMessage: CanMessage {
         Milage: \(milage)
         """
     }
-    
-}
-
-struct TextMessage: CanMessage {
-    
-    private let message: String
-    
-    init(data: [UInt8]) {
-        message = String(bytes: data, encoding: .ascii)!
-    }
-    
-    var description: String {
-        return message
-    }
-    
-}
-
-struct PowerUsageMessage: CanMessage {
-    
-    typealias Watts = Int
-    let usage: Watts
-    
-    init(data: [UInt8]) {
-        usage = (hexInt(from: data[3..<7]) - 10_000) * 10
-    }
-    
-    var description: String {
-        return "Usage: \(usage)W"
-    }
-    
 }
 
 struct BatteryLevelMessage: CanMessage {
@@ -95,7 +62,19 @@ struct BatteryLevelMessage: CanMessage {
     var description: String {
         return "Battery level \(level)%"
     }
+}
+
+struct TextMessage: CanMessage {
     
+    private let message: String
+    
+    init(data: [UInt8]) {
+        message = String(bytes: data, encoding: .ascii)!
+    }
+    
+    var description: String {
+        return message
+    }
 }
 
 struct CanMessageCollection: Codable {
@@ -123,7 +102,6 @@ struct CanMessageCollection: Codable {
         case date
         case chargeLevel = "Battery Level"
         case odometer = "Odometer"
-        case powerUsage = "Power Usage"
     }
     
     func encode(to encoder: Encoder) throws {
@@ -131,7 +109,6 @@ struct CanMessageCollection: Codable {
         try container.encode(date, forKey: .date)
         try container.encodeIfPresent(data(for: .chargeLevel) as? [BatteryLevelMessage], forKey: .chargeLevel)
         try container.encodeIfPresent(data(for: .odometer) as? [OdometerMessage], forKey: .odometer)
-        try container.encodeIfPresent(data(for: .powerUsage) as? [PowerUsageMessage], forKey: .powerUsage)
     }
     
     init() {
@@ -143,14 +120,12 @@ struct CanMessageCollection: Codable {
         date = try container.decode(Date.self, forKey: .date)
         data[PID.chargeLevel.identifier] = try container.decodeIfPresent([BatteryLevelMessage].self, forKey: .chargeLevel)
         data[PID.odometer.identifier] = try container.decodeIfPresent([OdometerMessage].self, forKey: .odometer)
-        data[PID.powerUsage.identifier] = try container.decodeIfPresent([PowerUsageMessage].self, forKey: .powerUsage)
     }
-    
 }
 
 extension CanMessageCollection: Equatable {
     static func ==(lhs: CanMessageCollection, rhs: CanMessageCollection) -> Bool {
-        return ![PID.chargeLevel, .odometer, .powerUsage].map({
+        return ![PID.chargeLevel, .odometer].map({
             lhs.data(for: $0)?.count == rhs.data(for: $0)?.count
         }).contains(false) && lhs.date == rhs.date
     }

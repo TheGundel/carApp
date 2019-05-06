@@ -32,5 +32,4 @@ class StopWatch {
     func stop() {
         startTime = nil
     }
-    
 }

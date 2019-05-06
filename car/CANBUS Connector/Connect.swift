@@ -103,7 +103,6 @@ class Connect: NSObject {
                 return
             }
             
-            
         case let initiate as AdHocCommand where initiate == AdHocCommand.initiate:
             runSetup()
             return
@@ -116,21 +115,21 @@ class Connect: NSObject {
         let data = command.data
         _ = data.withUnsafeBytes { outputStream.write($0, maxLength: data.count) }
     }
-   
+    
     func changePID(){
         if(!commandsQueue.isEmpty){
             return
         }
-                
+        
         send(command: AdHocCommand.stopRead)
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
-        if(self.currentPID == .chargeLevel){
-            self.commandsQueue = [ConfigurationCommand.setPID(.odometer), AdHocCommand.read]
-
-        } else {
-            self.commandsQueue = [ConfigurationCommand.setPID(.chargeLevel), AdHocCommand.read]
-        }
-        self.handleQueue()
+            if(self.currentPID == .chargeLevel){
+                self.commandsQueue = [ConfigurationCommand.setPID(.odometer), AdHocCommand.read]
+                
+            } else {
+                self.commandsQueue = [ConfigurationCommand.setPID(.chargeLevel), AdHocCommand.read]
+            }
+            self.handleQueue()
         }
     }
     
@@ -152,8 +151,6 @@ class Connect: NSObject {
             send(command: command)
         }
     }
-    
-    
 }
 
 extension Connect: StreamDelegate {
@@ -219,7 +216,6 @@ extension Connect: StreamDelegate {
             delegate?.connect(self, didReceiveDataCollection: dataProcessor.process(buffer))
         }
     }
-    
 }
 
 fileprivate struct Socket: SocketProtocol {
