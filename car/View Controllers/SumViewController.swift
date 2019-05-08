@@ -57,20 +57,21 @@ class SumViewController: UIViewController {
         if let time = sum.time {
             sumView.timeResult.text = time
         }
+        sumView.batteryUsageResult.text = "\(sum.batteryUsage) %"
         
         //This calculation is based on the Smart specification
-        let kW = sum.batteryUsage * 0.3
-        sumView.batteryUsageResult.text = "\(kW) kW"
+        let kWh = (sum.batteryUsage * 13.2) / 100
+        let kWhRound = (kWh*100).rounded() / 100
         
         //Calculate effeciency
-        let idealDist = kW * 3.6
-        
         let subS = String(sumView.mapResult.text!.dropLast(3))
         let distance = Double(subS)
         
+        let idealkWh = distance! * 0.12
+        
         var effeciency = 0.0
-        if idealDist != 0 {
-            effeciency = (distance! / idealDist) * 100
+        if idealkWh != 0 {
+            effeciency = ((kWh / idealkWh) * 100).rounded()
         }
         
         if effeciency != 0.0 {
@@ -79,6 +80,6 @@ class SumViewController: UIViewController {
             sumView.efficiencyResult.text = "--%"
         }
         
-        sumView.efficiencyExplain.text = "The efficiency is based by the numbers provided by Smart Car that states you can drive 3,6 km per kW. You have driven \(sumView.mapResult.text!), and used \(sum.batteryUsage) % battery. This means you have used \(sumView.batteryUsageResult.text!), and your efficiency is therefor \(sumView.efficiencyResult.text!). "
+        sumView.efficiencyExplain.text = "The efficiency is based by the numbers provided by Smart Car that states you can drive 1 km per 0,12 kWh. You have driven \(sumView.mapResult.text!), and used \(sum.batteryUsage) % battery. This means you have used \(kWhRound) kWh, and your efficiency is therefor \(sumView.efficiencyResult.text!). "
     }
 }

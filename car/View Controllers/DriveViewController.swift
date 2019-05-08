@@ -80,6 +80,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
         let subS = String(driveView.batteryLifeResult.text!.dropLast(2))
         let endBat = Double(subS)
         let batteryUsage = startBat - endBat!
+        let batteryUsageRounded = (batteryUsage*100).rounded() / 100
         
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         
@@ -102,7 +103,7 @@ class DriveViewController: UIViewController, ConnectDelegate {
         sum.distance = driveView.mapResult.text
         sum.battery = driveView.batteryLifeResult.text
         sum.time = driveView.timeResult.text
-        sum.batteryUsage = batteryUsage
+        sum.batteryUsage = batteryUsageRounded
         
         // Save the data to coredata
         (UIApplication.shared.delegate as! AppDelegate).saveContext()

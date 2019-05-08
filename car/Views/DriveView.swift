@@ -89,7 +89,7 @@ class DriveView: UIView {
         speedText.font = UIFont.boldSystemFont(ofSize: 14)
         speedText.textColor = UIColor(red:0.40, green:0.40, blue:0.40, alpha:1.0)
         
-        speedResult.text = "00 km/t"
+        speedResult.text = "00 km/h"
         speedResult.font = speedResult.font.withSize(30)
         
         addSubview(speedIcon)
